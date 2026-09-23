@@ -1,0 +1,46 @@
+{
+  "app_name": "Oil Spill Detection & Maritime Monitoring System",
+  "theme": "Dark Maritime Command Center",
+  "archetype": "Archetype 7: Electric & Neon / Terminal / Precision Command",
+  "colors": {
+    "background_dark": "#0a1220",
+    "card_dark": "#0d1b2e",
+    "surface_dark": "#132742",
+    "border_color": "#1e3a5f",
+    "accent_cyan": "#06b6d4",
+    "alert_red": "#ef4444",
+    "vessel_green": "#10b981",
+    "warning_orange": "#f59e0b",
+    "text_primary": "#f8fafc",
+    "text_secondary": "#94a3b8"
+  },
+  "typography": {
+    "headings": "Outfit, sans-serif",
+    "body": "Inter, sans-serif",
+    "mono": "JetBrains Mono, monospace"
+  },
+  "key_features": [
+    "Interactive Leaflet Map with Oil Spill Polygons & AIS Vessel tracks",
+    "AI Oil Spill Detection Upload & PyTorch U-Net / OpenCV contour mask generation",
+    "AIS Vessel Tracking with 50km/6h spatial proximity search",
+    "Explainable Source Vessel Scoring Engine (0-100 Confidence Index)",
+    "Ocean Currents & Weather Drift Trajectory Simulation",
+    "Automated Alert Management & Severity System",
+    "PDF/Printable Full Maritime Forensic Report Generator",
+    "Historical Detection Records & Filtering",
+    "System Settings & Model Threshold Controls"
+  ],
+  "image_urls": [
+    {
+      "category": "oil_spill_satellite",
+      "image_url": "https://images.unsplash.com/photo-1760624876201-be9e17d332fd?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1MDV8MHwxfHNlYXJjaHwzfHxzYXRlbGxpdGUlMjBvY2VhbiUyMG9pbCUyMHNwaWxsJTIwcmFkYXIlMjBtYXJpdGltZXxlbnwwfHx8fDE3ODkwNTQwMTF8MA&ixlib=rb-4.1.0&q=85",
+      "description": "Dark seaweed and oil spill surface anomaly simulation in green-blue ocean water"
+    },
+    {
+      "category": "vessel_cargo",
+      "image_url": "https://images.unsplash.com/photo-1616421004055-e6c780c51241?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1MDV8MHwxfHNlYXJjaHwyfHxzYXRlbGxpdGUlMjBvY2VhbiUyMG9pbCUyMHNwaWxsJTIwcmFkYXIlMjBtYXJpdGltZXxlbnwwfHx8fDE3ODkwNTQwMTF8MA&ixlib=rb-4.1.0&q=85",
+      "description": "Large red cargo and tanker ship in open ocean for AIS vessel simulation"
+    }
+  ],
+  "instructions_to_main_agent": "Ensure React JS (.js files) implementation has full interactive fidelity with Leaflet map integration, real-time simulated AI detection masks (side-by-side original & mask), AIS vessel proximity calculation, drift trajectory simulator, reporting modal, and dark maritime styling (#0a1220 bg, #06b6d4 cyan accents, #ef4444 alerts)."
+}

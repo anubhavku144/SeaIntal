@@ -1,0 +1,73 @@
+@import 'leaflet/dist/leaflet.css';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg-main: #0a1220;
+  --bg-card: #0d1b2e;
+  --bg-card-hover: #132742;
+  --border-color: #1e3a5f;
+  --cyan-accent: #06b6d4;
+  --blue-primary: #0284c7;
+  --red-alert: #ef4444;
+  --green-vessel: #10b981;
+  --orange-warning: #f59e0b;
+}
+
+body {
+  margin: 0;
+  background-color: #0a1220;
+  color: #e2e8f0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #0a1220;
+}
+::-webkit-scrollbar-thumb {
+  background: #1e3a5f;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #0284c7;
+}
+
+/* Leaflet dark customizer */
+.leaflet-container {
+  background: #09131e !important;
+  font-family: inherit;
+  border-radius: 0.5rem;
+  z-index: 10;
+}
+
+.leaflet-popup-content-wrapper {
+  background: #0d1b2e !important;
+  color: #f1f5f9 !important;
+  border: 1px solid #1e3a5f !important;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.7) !important;
+  border-radius: 8px !important;
+}
+
+.leaflet-popup-tip {
+  background: #0d1b2e !important;
+  border: 1px solid #1e3a5f !important;
+}
+
+/* Pulse animation for oil spill */
+@keyframes oilPulse {
+  0% { opacity: 0.7; transform: scale(1); }
+  50% { opacity: 0.95; transform: scale(1.02); }
+  100% { opacity: 0.7; transform: scale(1); }
+}
+
+.oil-spill-pulse {
+  animation: oilPulse 2.5s infinite ease-in-out;
+}

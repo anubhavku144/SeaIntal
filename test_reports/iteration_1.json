@@ -1,0 +1,61 @@
+{
+  "summary": "Completed public API regression and browser E2E coverage for authentication, dashboard/map, AI detection, AIS, archive, alerts, reports, and settings. Backend 8/8 passed and all requested UI flows completed.",
+  "backend_issues": {
+    "critical": [
+      {
+        "endpoint": "CORS middleware",
+        "issue": "With credentials enabled, preflight reflects arbitrary Origin (tested https://evil.example). Restrict allow_origins to the configured frontend origin.",
+        "priority": "HIGH"
+      },
+      {
+        "endpoint": "/api/reports/generate",
+        "issue": "Report generation uses get_current_user_optional, so reports can be created without authentication; require get_current_user for this operational action.",
+        "priority": "HIGH"
+      }
+    ],
+    "minor": [
+      {
+        "endpoint": "Authentication controls",
+        "issue": "No brute-force lockout/login_attempts behavior is implemented after repeated failed logins, despite auth playbook requirement."
+      }
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [
+      {
+        "flow": "Unauthenticated application load",
+        "issue": "AuthContext catches 401 from /api/auth/me and installs a hardcoded demo admin user, allowing the full console to render without a valid JWT.",
+        "affected_selectors": ["[data-testid=main-dashboard-view]", "[data-testid=nav-user-name]"]
+      }
+    ],
+    "design_issues": [
+      {
+        "screen": "Reports page",
+        "issues": ["Browser console reports invalid HTML/hydration warning because a span is rendered inside each select option (React: <span> cannot be a child of <option>)."]
+      }
+    ]
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_maritime_api.py",
+    "/app/test_reports/pytest/pytest_results.xml",
+    "/app/test_reports/iteration_1.json"
+  ],
+  "action_items": [
+    "Remove the AuthContext demo-user fallback and redirect unauthenticated users to /login.",
+    "Restrict credentialed CORS to the configured frontend origin.",
+    "Require authentication for report generation and implement login attempt lockout if required by the auth contract.",
+    "Render plain text in ReportsPage select option labels to remove the hydration warning."
+  ],
+  "critical_code_review_comments": [
+    "backend/server.py uses fallback defaults for MONGO_URL, DB_NAME, and JWT_SECRET instead of failing fast when environment configuration is missing.",
+    "Frontend routes are not protected by authentication; the current fallback effectively bypasses JWT authorization."
+  ],
+  "updated_files": ["/app/backend/tests/test_maritime_api.py", "/app/test_reports/iteration_1.json"],
+  "success_rate": {"backend": "100% (8/8)", "frontend": "100% requested flows completed; console warnings present"},
+  "seed_data_creation": "Created one TEST-990001 AIS vessel through the CSV upload test and generated a detection/report; seeded records were otherwise not modified except resolving an existing alert during E2E testing.",
+  "retest_needed": true,
+  "should_call_test_agent_after_fix": true,
+  "context_for_next_testing_agent": "All requested navigation and core interactions were exercised against the public preview URL. Re-test unauthenticated route access, CORS preflight, report authorization, and the Reports option warning after fixes.",
+  "rca of the issue": "The unauthenticated access is caused by AuthContext.checkAuth catching any /auth/me failure and assigning a static admin object rather than leaving user null. The CORS issue is caused by allow_origins=['*'] combined with allow_credentials=True; Starlette reflects arbitrary origins during credentialed preflight. The report authorization gap is caused by Depends(get_current_user_optional)."
+}
